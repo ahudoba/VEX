@@ -6,8 +6,10 @@ AYTOMATING THE MANUFACTURING
 
 3. Create the directories for the number of samples (number of Exhausts) through running 'make_exhaust_directories.m'
 
-4. Run 'transfer_samping_files.m' to transer from the 'Nominal' Stamping directory ('Stamping') the files for the run of the permutation and the Stamping simulation 
-to the 'Stampings' folder for each sample(each Exhaust)
+%%% AM*  3a. Run 'variables bounds'
+
+4. Run 'transfer_stamping_files.m' to transer from the 'Nominal' Stamping directory ('Stamping') the files for the run of the permutation and the Stamping simulation 
+to the 'Stampings' folder for each sample (each Exhaust)
 
 5. Run 'transfer_bending_files.m' to transer from the 'Nominal' Bending directory ('Bendings') the files for the run of the permutation  
 to the 'Bendings' folder for each sample(each Exhaust)
@@ -18,6 +20,7 @@ Solutions (thickness values) which lie in the intersection regeion among two con
 lie among the distributions. (Note X)
 
 6a.Sampling the Thickness for the Stampings (Resonator Shells Thickness) while running 'Sampling_thickness_stamping.m'.
+
 6b. Running the 'Thickness_Stamping_Reject_Gaussian_random.m' to check if there are rejected values for the Stamping Thickness but also work out their replacements
 (please view (Note X))
 
@@ -47,38 +50,34 @@ b. Please run also ' Permutation_Matrix_in_mat_file.m'
 with running 'make_exhaust_stamping_RUN_directories.m while opening the 'RUN' directories in each Exhaust
 
 16. Performing permutations in 'Exhaust_%d/Stampings/Part16', 'Exhaust_%d/Stampings/Part17', 'Exhaust_%d/Stampings/Part21,22' where '%d' is the typed number of the sample
-(ns (please view 1.) 
+(ns (please view 1.) with parts cotrained Executing 'templex_run.bat', running the 'read2_new_coords.parm' to copy the new coordinates encapturing the new Resonator(2122) or Stamping part(in case of Part16, Part17)
+executing 'computation.bat' to run the Stamping simulation,Running 'reading_opt_part16.m', 'reading_opt_part17.m', 'reading_opt_part2122.m' enclosed in the 'RUN' directories as made in step 15c.
 
-17a. Executing 'templex_run.bat'
-17b.Running the 'read2_new_coords.parm' to copy the new coordinates encapturing the new Resonator(2122) or Stamping part(in case of Part16, Part17)
-17c. Executing 'computation.bat' to run the Stamping simulation
-17d. Running 'reading_opt_part16.m', 'reading_opt_part17.m', 'reading_opt_part2122.m' enclosed in the 'RUN' directories as made in step 15c.
+16a. Run the Stampings_run, which executes 'templex_run.bat', running the 'read2_new_coords.parm', 'computation.bat' in all the 'Exhaust_%d' directories
+16b. Run the Thinning.m to get the Thinning(Response) out for each Exhaust.
 
 Ensuring that ALL the Stamping simulations have run:
-18. Create the directory 'Reliability_STAMPING' with the code 'make_Reliability_Stamping_Directory.m'
+17. Create the directory 'Reliability_STAMPING' with the code 'make_Reliability_Stamping_Directory.m'
 After entering ourselrves in the  'Reliability_STAMPING' directory
-
-19. Run the 'Monte_Carlo_0.m' to assign our response for the Stampings, their Thinning also to vectors
-20. Run the 'Monte_Carlo_Correlation_coefficients.m' with aim to obtain the Correlation Matrix with enclosed information for the relatioship of 
-Variables to the Response
-21. Run the 'Monte_Carlo_Histogram.m' to extract the Thinning spectrum in Histogram
-22. Run the 'Monte_Carlo_Feasibility.m'  to work out the Feasible solutions
-23. Run the 'Surface_Tradeoff.m' to get the 3D surface of the Thinning with the (Design) Variables such to indicate likely the pairs for the solutions which drive Thinning
-such that this satisfies the manufacturing Thinning constraint
+18. Run the Moonte_Carlo_Stamping.m within which the Monte_Carlo.m runs inside the Teliability_STAMPING, performing so the Monte Carlo Analysis in all 
+Exhaust Stampings
+19. Run the 'make_Surfaces_Stamping_Directory.m' to create the 'SURFACES' directory.
+20. Run the 'Surface_Tradeoff_Stamping.m' to run within the 'Surface_Tradeoff.m' withing the folder 'SURFACES' used to create the relationship surfaces between 
+the Design Variables and the Thinning for the Stampings. 
 
 AUTOMATING THE BENDING SIMULATIONS
-24. Run the 'Changing_Bending_tpl.m', prepared to run the permutations on the Bending pipes
-25. Run the 'Copying_changed_beding_tpl.m' to copy 'read2_new_coords_key.m' in each Exhaust sample 'Exhaust_%d/Bendings'
-26. Run the 'Bending_pipes_angles.m'
-27. Run the 'Changing_Bending_key.m'
-28. Rename the Bending directories through running the 'Renaming_Bending_Directories.m'
-29. Run the Bend angle in the 'read2_new_coords_key.m' with running the 'Changing_Bend_Angle.m'
+21. Run the 'Changing_Bending_tpl.m', prepared to run the permutations on the Bending pipes
+22. Run the 'Copying_changed_beding_tpl.m' to copy 'read2_new_coords_key.m' in each Exhaust sample 'Exhaust_%d/Bendings'
+23. Run the 'Bending_pipes_angles.m'
+24. Run the 'Changing_Bending_key.m'
+25. Rename the Bending directories through running the 'Renaming_Bending_Directories.m'
+26. Run the Bend angle in the 'read2_new_coords_key.m' with running the 'Changing_Bend_Angle.m'
 
-31. Running the 'Ascending_Thinning_Bending.m', as saved in 'Bending' directory.
-32. Copy the 'Ascending_Thinning_Bending.m' to the 'Exhaust_%d/Bendings/Bending_1_i' with i=1,...,6, number of bends and after being modified to 
+27. Running the 'Ascending_Thinning_Bending.m', as saved in 'Bending' directory.
+28. Copy the 'Ascending_Thinning_Bending.m' to the 'Exhaust_%d/Bendings/Bending_1_i' with i=1,...,6, number of bends and after being modified to 
 'Exhaust_%d/Bendings/Bending_2_j' with j=1,...,7.
 
-33. Changing the MASTER Model with running 'Changing_MASTER_MODEL_tpl.m'
+29. Changing the MASTER Model with running 'Changing_MASTER_MODEL_tpl.m'
 
 
 
